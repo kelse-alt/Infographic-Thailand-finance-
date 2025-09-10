@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phuket, Thailand: 30-Day Financial Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        .flowchart-step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .flowchart-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #A133FF;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        .loading-text {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#3357FF] tracking-tight">Your 30-Day Financial Guide to Phuket</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">An infographic planning your budget for a 30-day adventure for two in Thailand, including Muay Thai training. All figures based on an exchange rate of £1 = 43 THB.</p>
+        </header>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Choose Your Travel Style</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-[#33FF57] text-center">
+                    <h3 class="text-2xl font-bold text-gray-700">Budget Traveler</h3>
+                    <p class="text-5xl font-black text-[#33FF57] my-4">฿2,500</p>
+                    <p class="text-xl font-semibold text-gray-500">per day / ~£60</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-2xl border-t-4 border-[#FF5733] text-center scale-105">
+                    <h3 class="text-2xl font-bold text-gray-700">Mid-Range Comfort</h3>
+                    <p class="text-5xl font-black text-[#FF5733] my-4">฿8,000</p>
+                    <p class="text-xl font-semibold text-gray-500">per day / ~£185</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-[#FF33A1] text-center">
+                    <h3 class="text-2xl font-bold text-gray-700">Luxury Seeker</h3>
+                    <p class="text-5xl font-black text-[#FF33A1] my-4">฿25,000+</p>
+                    <p class="text-xl font-semibold text-gray-500">per day / ~£580+</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2">Mid-Range Budget Breakdown</h2>
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Focusing on a comfortable mid-range trip, your total estimated budget for 30 days is **฿240,000**. Here's a potential allocation across key spending categories.</p>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="chart-container">
+                    <canvas id="budgetBreakdownChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Visualizing Daily Costs</h2>
+             <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Understanding typical daily expenses is key to staying on track. Below is a comparison of common costs you'll encounter in Phuket, from accommodation to street food.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                     <h3 class="text-xl font-bold text-center mb-4">Typical Daily Spending by Category (THB)</h3>
+                    <div class="chart-container h-96 md:h-[450px]">
+                        <canvas id="dailyCostsByCategoryChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                     <h3 class="text-xl font-bold text-center mb-4">Food & Drink Price Comparison (THB)</h3>
+                    <div class="chart-container h-96 md:h-[450px]">
+                        <canvas id="foodDrinkComparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Special Focus: Muay Thai Training</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+                     <h3 class="text-2xl font-bold text-gray-700">Monthly Training Pass</h3>
+                    <p class="text-6xl font-black text-[#A133FF] my-4">~฿15,000</p>
+                    <p class="text-lg text-gray-600">This one-time cost covers unlimited group sessions for one person for the entire month, a fantastic value for an immersive experience.</p>
+                </div>
+                 <div class="bg-white p-8 rounded-xl shadow-lg">
+                     <h3 class="text-2xl font-bold text-center text-gray-700 mb-6">Your Path to Training</h3>
+                    <div class="grid grid-cols-5 items-center">
+                        <div class="flowchart-step">
+                            <div class="bg-[#A133FF] text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-2xl shadow-md">1</div>
+                        </div>
+                        <div class="flowchart-arrow">→</div>
+                        <div class="flowchart-step">
+                             <div class="bg-[#A133FF] text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-2xl shadow-md">2</div>
+                        </div>
+                        <div class="flowchart-arrow">→</div>
+                        <div class="flowchart-step">
+                           <div class="bg-[#A133FF] text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-2xl shadow-md">3</div>
+                        </div>
+                    </div>
+                     <div class="grid grid-cols-3 gap-2 mt-2 text-center text-sm font-semibold">
+                         <div>Research & Choose Gym</div>
+                         <div>Book Monthly Pass</div>
+                         <div>Train & Enjoy</div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold text-center mb-4">Your Personalized Itinerary ✨</h2>
+                <p class="text-center text-gray-600 mb-4 max-w-2xl mx-auto">Get a tailored 3-day sample itinerary to kickstart your trip planning, based on your budget and interest in Muay Thai.</p>
+                <div class="flex justify-center mb-6">
+                    <button id="generateItineraryButton" onclick="generateItinerary()" class="px-6 py-3 text-lg font-bold text-white bg-[#A133FF] rounded-full shadow-lg hover:bg-[#8e29e0] transition-colors duration-300">Generate 3-Day Sample Itinerary ✨</button>
+                </div>
+                <div id="itineraryOutput" class="prose max-w-none"></div>
+                <div id="loadingIndicator" class="hidden text-center text-lg text-gray-500 loading-text">Generating your itinerary...</div>
+            </div>
+        </section>
+        
+        <footer class="text-center mt-12 pt-8 border-t border-gray-300">
+            <p class="text-gray-600">Infographic created for a planned trip in October 2025. Costs are estimates and subject to change.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const vibrantPalette = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF', '#FFC300'];
+
+        function wrapLabel(label) {
+            const maxLength = 16;
+            if (typeof label !== 'string' || label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        }
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                     labels: {
+                        font: {
+                            size: 14,
+                            family: 'Inter'
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    bodyFont: {
+                        size: 14,
+                        family: 'Inter'
+                    },
+                    titleFont: {
+                        size: 16,
+                        family: 'Inter',
+                        weight: 'bold'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                         font: {
+                            size: 12,
+                            family: 'Inter'
+                        }
+                    },
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                     ticks: {
+                         font: {
+                            size: 12,
+                            family: 'Inter'
+                        }
+                    },
+                    grid: {
+                        color: '#e0e0e0',
+                        borderDash: [5, 5]
+                    }
+                }
+            }
+        };
+
+        const budgetBreakdownCtx = document.getElementById('budgetBreakdownChart').getContext('2d');
+        new Chart(budgetBreakdownCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Accommodation', 'Food & Drink', 'Activities', 'Muay Thai Training', 'Transport', 'Shopping & Misc'],
+                datasets: [{
+                    label: 'Budget Allocation (THB)',
+                    data: [90000, 60000, 35000, 15000, 20000, 20000],
+                    backgroundColor: vibrantPalette,
+                    borderColor: '#ffffff',
+                    borderWidth: 4
+                }]
+            },
+            options: { ...defaultChartOptions,
+                cutout: '60%'
+            }
+        });
+
+        const dailyCostsByCategoryCtx = document.getElementById('dailyCostsByCategoryChart').getContext('2d');
+        new Chart(dailyCostsByCategoryCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mid-range Hotel', 'Meals for Two', 'Local Transport', 'Small Activity'],
+                datasets: [{
+                    label: 'Cost in THB',
+                    data: [3000, 1500, 500, 1000],
+                    backgroundColor: vibrantPalette.slice(0, 4),
+                    borderRadius: 8
+                }]
+            },
+            options: { ...defaultChartOptions,
+                 indexAxis: 'y'
+            }
+        });
+
+        const foodDrinkComparisonCtx = document.getElementById('foodDrinkComparisonChart').getContext('2d');
+        new Chart(foodDrinkComparisonCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Street Food Meal', 'Mid-Range Meal', 'Local Beer', 'Fruit Shake'],
+                datasets: [{
+                    label: 'Cost in THB',
+                    data: [80, 500, 80, 60],
+                    backgroundColor: vibrantPalette.slice(1, 5),
+                    borderRadius: 8
+                }]
+            },
+            options: defaultChartOptions
+        });
+
+        async function generateItinerary() {
+            const button = document.getElementById('generateItineraryButton');
+            const outputDiv = document.getElementById('itineraryOutput');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            button.disabled = true;
+            loadingIndicator.classList.remove('hidden');
+            outputDiv.innerHTML = '';
+
+            const userQuery = "Generate a detailed, day-by-day sample itinerary for a mid-range budget traveler spending 30 days in Phuket, Thailand. The itinerary should focus on the first 3 days and include activities, food recommendations, and how to incorporate Muay Thai training. Use a friendly, conversational tone.";
+            const systemPrompt = "You are a world-class travel planner and tour guide. Your task is to generate a travel itinerary that is helpful, clear, and easy to follow. Format your response using Markdown headings and bullet points for readability.";
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            let retries = 0;
+            const maxRetries = 5;
+            const delay = 1000;
+
+            const fetchWithRetry = async () => {
+                try {
+                    const payload = {
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        tools: [{ "google_search": {} }],
+                        systemInstruction: {
+                            parts: [{ text: systemPrompt }]
+                        },
+                    };
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return await response.json();
+                } catch (error) {
+                    if (retries < maxRetries) {
+                        retries++;
+                        await new Promise(res => setTimeout(res, delay * retries));
+                        return fetchWithRetry();
+                    } else {
+                        throw error;
+                    }
+                }
+            };
+            
+            try {
+                const result = await fetchWithRetry();
+                const candidate = result?.candidates?.[0];
+                const text = candidate?.content?.parts?.[0]?.text;
+                if (text) {
+                    outputDiv.innerHTML = `<p>${text.replace(/\n/g, '<br>')}</p>`;
+                } else {
+                    outputDiv.innerHTML = '<p class="text-red-500">Failed to generate itinerary. Please try again.</p>';
+                }
+            } catch (error) {
+                outputDiv.innerHTML = `<p class="text-red-500">An error occurred: ${error.message}</p>`;
+            } finally {
+                button.disabled = false;
+                loadingIndicator.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
